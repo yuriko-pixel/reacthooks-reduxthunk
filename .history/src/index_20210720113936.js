@@ -4,27 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
-import {applyMiddleware, createStore, compose} from 'redux'
-import thunk from 'redux-thunk'
 
-const initState = {
-  items: []
-}
-
-const rootReducer = (state = initState, action) => {
-  switch(action.type) {
-    case 'add': return {items: [...state.items, action.payload]}
-    default: return state
-  }
-}
-
-
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(rootReducer, /* preloadedState, */ composeEnhancers(
-
-    applyMiddleware(thunk)
-  ));
+const store = createStore(rootReducer)
 
 ReactDOM.render(
   <React.StrictMode>

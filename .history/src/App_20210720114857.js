@@ -7,24 +7,23 @@ const addCreator = (data) => {
   return {type: 'add', payload: data}
 }
 
+const fetchAddCreator = () => {
+  setTimeout(()=> {
+    addCreator({id: 1, title: "neko"})
+  },3000)
+}
 
 function App() {
   const items = useSelector(state => state.items)
   const dispatch = useDispatch()
 
-  const fetchData = () => {
-    fetch('https://fakestoreapi.com/products')
-    .then(res => res.json())
-    .then(result => dispatch(addCreator(result)))
-  }
-
   useEffect(()=> {
-    fetchData()
+    dispatch(fetchAddCreator())
   },[])
   return (
-    <ul className="App">
-      {!items ? (<p>Loading</p>):(items[0].map( i=> <li key={i.id}>{i.title}</li>))}
-    </ul>
+    <div className="App">
+      {!items ? (<p>Loading</p>):(items.map( i=> <p>{i.title}</p>))}
+    </div>
   );
 }
 

@@ -7,6 +7,11 @@ const addCreator = (data) => {
   return {type: 'add', payload: data}
 }
 
+const fetchData = (dispatch) => {
+  fetch('https://fakestoreapi.com/products')
+  .then(res => res.json())
+  .then(result => dispatch(addCreator(result)))
+}
 
 function App() {
   const items = useSelector(state => state.items)
